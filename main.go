@@ -83,36 +83,7 @@ func GetValues(w http.ResponseWriter, r *http.Request) {
 	io.WriteString(w, fmt.Sprintln(ListOfPlayers))
 }
 
-/*Exersice: Loops and Functions*/
-// package main
-
-// import (
-// 	"fmt"
-// 	"math"
-// 	"github.com/Nazar_Test/logger"
-// 	"github.com/Nazar_Test/config"
-// )
-
-// func Sqrt(x float64) float64 {
-// 	z1 := 1.0
-// 	z0 := z1
-
-// 	for {
-
-// 		z1 = z1 - ((math.Pow(z1, 2) - x) / (2 * z1))
-// 		if (z1 - z0) < 0.001 {
-// 			return z1
-// 		}
-// 		z0 = z1
-// 		fmt.Println(z1, "**", z0)
-
-// 	}
-
-// }
-
 // func main() {
 // 	logger.Logger()
 // 	config.Config()
-// 	x := 2.0
-// 	fmt.Println(Sqrt(x))
 // }
