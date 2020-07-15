@@ -82,8 +82,3 @@ func PostPlayersList(w http.ResponseWriter, r *http.Request) {
 func GetValues(w http.ResponseWriter, r *http.Request) {
 	io.WriteString(w, fmt.Sprintln(ListOfPlayers))
 }
-
-// func main() {
-// 	logger.Logger()
-// 	config.Config()
-// }
