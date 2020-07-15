@@ -7,8 +7,8 @@ import (
 	"net/http"
 	"sort"
 
-	"github.com/UserDatabaseApi/src/config"
-	"github.com/UserDatabaseApi/src/logger"
+	"github.com/Nazar_Test/app/logger"
+	config "github.com/Nazar_Test/app/config"
 )
 
 type Player struct {
@@ -27,7 +27,7 @@ func main() {
 
 	port := ":8080"
 
-	configFilePath := "config.json"
+	configFilePath := "./config/config.json"
 	var (
 		Config config.Configuration
 		log    logger.Logger
@@ -38,6 +38,7 @@ func main() {
 	if err, Config = config.Load(configFilePath); err != nil {
 		log.Fatal(err)
 	}
+	fmt.Println(Config)
 
 	//Create service logger
 	if err, log = logger.Load(Config.Log); err != nil {
