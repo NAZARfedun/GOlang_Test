@@ -7,8 +7,8 @@ import (
 	"net/http"
 	"sort"
 
-	"github.com/Nazar_Test/app/logger"
 	config "github.com/Nazar_Test/app/config"
+	"github.com/Nazar_Test/app/logger"
 )
 
 type Player struct {
@@ -24,8 +24,6 @@ var ListOfPlayers []Player
 
 func main() {
 	ListOfPlayers = make([]Player, 0, 10)
-
-	port := ":8080"
 
 	configFilePath := "./config/config.json"
 	var (
@@ -49,8 +47,8 @@ func main() {
 	http.HandleFunc("/GetValues", GetValues)
 	http.HandleFunc("/PostPlayersList", PostPlayersList)
 
-	fmt.Println("Server started at  - ", port)
-	http.ListenAndServe(port, nil)
+	fmt.Println("Server started at  - ", Config.ListenPort)
+	http.ListenAndServe(Config.ListenPort, nil)
 }
 
 func PostValues(w http.ResponseWriter, r *http.Request) {
