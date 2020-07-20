@@ -1,7 +1,7 @@
 {
     "ListenPort" : ":8080",
     "Log" : {
-        "FileName" : "Misha",
+        "FileName" : "logs.log",
         "Level" : 25
     }
 }
