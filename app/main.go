@@ -7,8 +7,8 @@ import (
 	"net/http"
 	"sort"
 
-	"github.com/UserDatabaseApi/src/config"
-	"github.com/UserDatabaseApi/src/logger"
+	config "github.com/Nazar_Test/app/config"
+	"github.com/Nazar_Test/app/logger"
 )
 
 type Player struct {
@@ -25,9 +25,7 @@ var ListOfPlayers []Player
 func main() {
 	ListOfPlayers = make([]Player, 0, 10)
 
-	port := ":8080"
-
-	configFilePath := "config.json"
+	configFilePath := "./config/config.json"
 	var (
 		Config config.Configuration
 		log    logger.Logger
@@ -38,6 +36,7 @@ func main() {
 	if err, Config = config.Load(configFilePath); err != nil {
 		log.Fatal(err)
 	}
+	fmt.Println(Config)
 
 	//Create service logger
 	if err, log = logger.Load(Config.Log); err != nil {
@@ -48,8 +47,8 @@ func main() {
 	http.HandleFunc("/GetValues", GetValues)
 	http.HandleFunc("/PostPlayersList", PostPlayersList)
 
-	fmt.Println("Server started at  - ", port)
-	http.ListenAndServe(port, nil)
+	fmt.Println("Server started at  - ", Config.ListenPort)
+	http.ListenAndServe(Config.ListenPort, nil)
 }
 
 func PostValues(w http.ResponseWriter, r *http.Request) {

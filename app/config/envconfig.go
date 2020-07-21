@@ -11,7 +11,7 @@ type (
 	// Configuration is struct for holding service's configuration info
 	Configuration struct {
 		ListenPort string       `json:"ListenPort" validate:"required"`
-		Log        LoggerConfig `json:"Log validate:"required"`
+		Log        LoggerConfig `json:"Log" validate:"required"`
 	}
 
 	// LoggerConfig is a struct for holding logger configuration

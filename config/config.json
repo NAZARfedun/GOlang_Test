@@ -1,0 +1,7 @@
+{
+    "ListenPort" : ":8080",
+    "Log" : {
+        "FileName" : "logs.log",
+        "Level" : 25
+    }
+}
