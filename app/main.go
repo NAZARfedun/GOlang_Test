@@ -20,6 +20,10 @@ type PlayersList struct {
 	PlayerList []Player `json:"playerList"`
 }
 
+type Handlers struct {
+	Logger logger.Logger
+}
+
 var ListOfPlayers []Player
 
 func main() {
@@ -43,18 +47,23 @@ func main() {
 		log.Fatal(err)
 	}
 
-	http.HandleFunc("/PostValues", PostValues)
-	http.HandleFunc("/GetValues", GetValues)
-	http.HandleFunc("/PostPlayersList", PostPlayersList)
+	handlers := Handlers{log}
+
+	http.HandleFunc("/PostValues", handlers.PostValues)
+	http.HandleFunc("/GetValues", handlers.GetValues)
+	http.HandleFunc("/PostPlayersList", handlers.PostPlayersList)
 
 	fmt.Println("Server started at  - ", Config.ListenPort)
 	http.ListenAndServe(Config.ListenPort, nil)
 }
 
-func PostValues(w http.ResponseWriter, r *http.Request) {
+func (h Handlers) PostValues(w http.ResponseWriter, r *http.Request) {
 	var player Player
 
 	if err := json.NewDecoder(r.Body).Decode(&player); err != nil {
+		h.Logger.Errorln(err)
+		w.WriteHeader(http.StatusBadRequest)
+		w.Write([]byte(err.Error()))
 		return
 	}
 
@@ -64,10 +73,13 @@ func PostValues(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, player)
 }
 
-func PostPlayersList(w http.ResponseWriter, r *http.Request) {
+func (h Handlers) PostPlayersList(w http.ResponseWriter, r *http.Request) {
 	var playerslist PlayersList
 
 	if err := json.NewDecoder(r.Body).Decode(&playerslist); err != nil {
+		h.Logger.Errorln(err)
+		w.WriteHeader(http.StatusBadRequest)
+		w.Write([]byte(err.Error()))
 		return
 	}
 
@@ -78,6 +90,6 @@ func PostPlayersList(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, playerslist)
 }
 
-func GetValues(w http.ResponseWriter, r *http.Request) {
+func (h Handlers) GetValues(w http.ResponseWriter, r *http.Request) {
 	io.WriteString(w, fmt.Sprintln(ListOfPlayers))
 }
