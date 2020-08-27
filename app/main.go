@@ -68,7 +68,6 @@ func (h Handlers) PostValue(w http.ResponseWriter, r *http.Request) {
 	}
 
 	ListOfPlayers = append(ListOfPlayers, player)
-	//fmt.Println("**********")
 	fmt.Println(player)
 	w.WriteHeader(http.StatusCreated)
 	fmt.Fprint(w, player)
