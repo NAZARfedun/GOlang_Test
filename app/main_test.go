@@ -11,24 +11,6 @@ import (
 	"github.com/gorilla/mux"
 )
 
-// func TestDivisionSuccess(t *testing.T) {
-// 	expected := 3
-// 	actual := Division(6, 2)
-
-// 	if expected != actual {
-// 		t.Error()
-// 	}
-// }
-
-// func TestDivisionFail(t *testing.T) {
-// 	expected := 0
-// 	actual := Division(6, 0)
-
-// 	if expected != actual {
-// 		t.Error()
-// 	}
-// }
-
 func TestPostPlayersListFail(t *testing.T) {
 	mockCtrl := gomock.NewController(t)
 	mockLogger := mocks.NewMockLogger(mockCtrl)
